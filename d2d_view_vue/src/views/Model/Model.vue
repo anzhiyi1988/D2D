@@ -2,37 +2,49 @@
     <a-layout>
         <a-layout-sider width="200" style="background: #fff">
             <a-menu
-                theme="dark"
                 mode="inline"
-                :defaultSelectedKeys="['1']"
-                :defaultOpenKeys="['sub1']"
+                :default-selected-keys="[modelTree.id]"
+                :default-open-keys="[modelTree.id]"
                 :style="{ height: '100%', borderRight: 0 }"
             >
-                <a-menu-item key="1">模型树</a-menu-item>
+                <a-menu-item
+                    :key="modelTree.id"
+                    @click="showMangement(modelTree.type)"
+                >
+                    {{ modelTree.name }}
+                </a-menu-item>
+                <template v-for="lev2 in modelTree.subs">
+                    <a-sub-menu :key="lev2.id">
+                        <span slot="title">
+                            <span>{{ lev2.name }}</span>
+                        </span>
+                        <template v-for="lev3 in lev2.subs">
+                            <a-menu-item
+                                :key="lev3.id"
+                                @click="showMangement(lev3.type)"
+                            >
+                                {{ lev3.name }}
+                            </a-menu-item>
+                        </template>
+                    </a-sub-menu>
+                </template>
             </a-menu>
         </a-layout-sider>
-        <a-layout style="padding: 0 24px 24px">
-            <a-breadcrumb style="margin: 16px 0">
-                <a-breadcrumb-item>这里应该是一堆操作按钮</a-breadcrumb-item>
-            </a-breadcrumb>
-            <a-layout-content
-                :style="{
-                    background: '#fff',
-                    padding: '24px',
-                    margin: 0,
-                    minHeight: '280px'
-                }"
-            >
-                这里显示的是内容啊！
-            </a-layout-content>
-        </a-layout>
+        <a-layout-content
+            :style="{
+                background: '#fff',
+                padding: '24px',
+                margin: 0,
+                minHeight: '280px'
+            }"
+        >
+            <GroupManage v-if="nodeType === 'root'" />
+            <CodeManage v-if="nodeType === 'code'" />
+            <ModelManage v-if="nodeType === 'model'" />
+        </a-layout-content>
     </a-layout>
 </template>
 
-<script>
-export default {
-    name: "Mxgl"
-};
-</script>
+<script src="./index.js"></script>
 
 <style scoped></style>

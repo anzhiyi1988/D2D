@@ -7,6 +7,7 @@ import Introduce from "./views/Introduce/Introduce.vue";
 import Transform from "./views/Transform/Transform.vue";
 import Config from "./views/Config/Config.vue";
 import Version from "./views/Version/Version.vue";
+import Task from "./views/Task/Task.vue";
 
 Vue.use(Router);
 
@@ -27,12 +28,6 @@ export default new Router({
                     component: Introduce
                 },
                 {
-                    path: "/source",
-                    name: "source",
-                    meta: { title: "数据源" },
-                    component: Source
-                },
-                {
                     path: "/model",
                     name: "model",
                     meta: { title: "模型管理" },
@@ -43,6 +38,18 @@ export default new Router({
                     name: "transform",
                     meta: { title: "转换管理" },
                     component: Transform
+                },
+                {
+                    path: "/source",
+                    name: "source",
+                    meta: { title: "数据源" },
+                    component: Source
+                },
+                {
+                    path: "/task",
+                    name: "task",
+                    meta: { title: "任务管理" },
+                    component: Task
                 },
                 {
                     path: "/config",

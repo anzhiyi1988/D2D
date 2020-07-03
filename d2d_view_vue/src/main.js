@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import { Layout, Menu, Button, Breadcrumb, Icon } from "ant-design-vue";
+import { Layout, Menu, Button, Breadcrumb, Icon, Tree } from "ant-design-vue";
 
 Vue.config.productionTip = false;
 
@@ -12,6 +12,7 @@ Vue.use(Button);
 Vue.use(Menu);
 Vue.use(Breadcrumb);
 Vue.use(Icon);
+Vue.use(Tree);
 
 new Vue({
     router,
