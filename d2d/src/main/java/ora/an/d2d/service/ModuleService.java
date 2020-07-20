@@ -18,5 +18,4 @@ public class ModuleService {
         final List<Module> modules = moduleMapper.modules();
         return modules;
     }
-
 }

@@ -9,7 +9,7 @@ export default {
             nodeType: "root",
             modelTree: {
                 id: "root",
-                name: "模型树",
+                name: "所有模型分组",
                 type: "root",
                 level: "1",
                 subs: [
