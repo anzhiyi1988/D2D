@@ -1,8 +1,8 @@
-package ora.an.d2d.service;
+package orz.an.d2d.service;
 
 
-import ora.an.d2d.bean.Module;
-import ora.an.d2d.dao.ModuleMapper;
+import orz.an.d2d.bean.Module;
+import orz.an.d2d.dao.ModuleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -20,26 +20,24 @@ const columns = [
 ];
 
 export default {
-    name: "GroupManage",
+    name: "LogicGroupPanel",
     data() {
         return {
-            nodeType: "root",
-            modelGroupList: [],
+            logicList: [],
             columns
         };
     },
     mounted() {
-        console.log("youzhixingma ?");
-        this.getGroupList();
+        this.getLogicGroupList();
     },
 
     methods: {
-        getGroupList() {
-            let url = "http://172.16.193.19:8090/d2d/model/group/list";
+        getLogicGroupList() {
+            let url = this.MYURL.model.LogicGroupList;
             Axios.get(url)
                 .then(res => {
                     console.log("数据是：", res);
-                    this.modelGroupList = res.data;
+                    this.logicList = res.data;
                 })
                 .catch(e => {
                     console.log(

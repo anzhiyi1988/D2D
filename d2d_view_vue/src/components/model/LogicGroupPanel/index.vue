@@ -1,11 +1,10 @@
 <template>
     <div>
         <a-button type="primary">
-            新建模型组
+            新建分组
         </a-button>
-
         <a-layout>
-            <a-table :columns="columns" :data-source="modelGroupList">
+            <a-table row-key="id" :columns="columns" :data-source="logicList">
                 <span slot="name" slot-scope="text, record">
                     <a @click="viewModelGroup(record.id)">{{ text }}</a>
                 </span>

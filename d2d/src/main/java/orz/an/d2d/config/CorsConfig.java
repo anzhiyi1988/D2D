@@ -4,7 +4,7 @@
  * @className ora.an.d2d.config.CorsConfig
  * @copyright anzhy.
  */
-package ora.an.d2d.config;
+package orz.an.d2d.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -9,6 +9,11 @@ import Config from "./views/Config/Config.vue";
 import Version from "./views/Version/Version.vue";
 import Task from "./views/Task/Task.vue";
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err);
+};
+
 Vue.use(Router);
 
 export default new Router({

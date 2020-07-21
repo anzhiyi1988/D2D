@@ -1,77 +1,46 @@
-import GroupManage from "../../components/model/GroupManage/index.vue";
-import CodeManage from "../../components/model/CodeManage/index.vue";
-import ModelManage from "../../components/model/ModelManage/index.vue";
+import LogicGroupPanel from "../../components/model/LogicGroupPanel/index.vue";
+import CodePanel from "../../components/model/CodePanel/index.vue";
+import ModelPanel from "../../components/model/ModelPanel/index.vue";
+import Axios from "axios";
+
 export default {
     name: "Model",
-    components: { GroupManage, CodeManage, ModelManage },
+    components: { LogicGroupPanel, CodePanel, ModelPanel },
     data() {
         return {
-            nodeType: "root",
-            modelTree: {
-                id: "root",
-                name: "所有模型分组",
-                type: "root",
-                level: "1",
-                subs: [
-                    {
-                        id: "1",
-                        name: "中央信访原始库",
-                        level: "2",
-                        subs: [
-                            {
-                                name: "业务代码",
-                                level: "3",
-                                type: "code"
-                            },
-                            {
-                                name: "业务模型",
-                                level: "3",
-                                type: "model"
-                            }
-                        ]
-                    },
-                    {
-                        id: "2",
-                        name: "中央信访标准库",
-                        level: "2",
-                        subs: [
-                            {
-                                name: "业务代码",
-                                level: "3",
-                                type: "code"
-                            },
-                            {
-                                name: "业务模型",
-                                level: "3",
-                                type: "model"
-                            }
-                        ]
-                    },
-                    {
-                        id: "3",
-                        name: "中央信访主题库",
-                        level: "2",
-                        subs: [
-                            {
-                                name: "业务代码",
-                                level: "3",
-                                type: "code"
-                            },
-                            {
-                                name: "业务模型",
-                                level: "3",
-                                type: "model"
-                            }
-                        ]
-                    }
-                ]
-            }
+            groupType: this.MYCONST.LogicGroup,
+            groupTree: [],
+            currPath: [],
+            gotoGroupId: ""
         };
     },
+    mounted() {
+        console.log("获取模型树初始加载方法");
+        this.getGroupTree();
+    },
     methods: {
-        showMangement(type) {
-            console.log("root is clicked ", type);
-            this.nodeType = type;
+        changePanel(group, subGroup) {
+            this.groupType = subGroup.type;
+            this.currPath = [];
+            this.currPath.push(group);
+            this.currPath.push(subGroup);
+            this.gotoGroupId = subGroup.id;
+        },
+        getGroupTree() {
+            let url = this.MYURL.model.GroupTree;
+            Axios.get(url)
+                .then(res => {
+                    console.log("model group tree is :", res.data);
+                    this.groupTree = res.data;
+                })
+                .catch(e => {
+                    console.log("获取数据失败，访问url ：" + url, e);
+                });
+        },
+        gotoLogicPanel() {
+            console.log("it is me !");
+            this.currPath = [];
+            this.groupType = this.MYCONST.LogicGroup;
         }
     }
 };

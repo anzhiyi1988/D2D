@@ -1,7 +1,7 @@
-package ora.an.d2d.controller;
+package orz.an.d2d.controller;
 
 import com.alibaba.fastjson.JSON;
-import ora.an.d2d.service.ModuleService;
+import orz.an.d2d.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

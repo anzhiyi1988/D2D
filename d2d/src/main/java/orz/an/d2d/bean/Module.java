@@ -1,4 +1,4 @@
-package ora.an.d2d.bean;
+package orz.an.d2d.bean;
 
 import lombok.Data;
 

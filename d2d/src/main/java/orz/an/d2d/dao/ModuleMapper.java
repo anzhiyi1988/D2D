@@ -1,7 +1,7 @@
-package ora.an.d2d.dao;
+package orz.an.d2d.dao;
 
 
-import ora.an.d2d.bean.Module;
+import orz.an.d2d.bean.Module;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;

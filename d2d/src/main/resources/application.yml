@@ -1,0 +1,19 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /d2d
+
+#\u6570\u636E\u5E93
+spring:
+  datasource:
+    url: jdbc:postgresql://172.16.33.242:5432/d2d_anzhy
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+swagger:
+  enable: true
+
+
+mybatis:
+  mapper-locations: orz.an.d2d.dao/*.xml

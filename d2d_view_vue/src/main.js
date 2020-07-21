@@ -2,6 +2,11 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import MYCONST from "./global/const.js";
+import MYURL from "./global/url.js";
+
+Vue.prototype.MYURL = MYURL;
+Vue.prototype.MYCONST = MYCONST;
 
 import {
     Layout,
