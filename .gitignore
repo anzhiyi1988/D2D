@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/d2d/.mvn
+/d2d/mvnw.cmd
+/d2d/mvnw
