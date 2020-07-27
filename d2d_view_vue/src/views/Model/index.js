@@ -1,17 +1,19 @@
-import LogicGroupPanel from "../../components/model/LogicGroupPanel/index.vue";
+import GroupPanel from "../../components/model/GroupPanel/index.vue";
 import CodePanel from "../../components/model/CodePanel/index.vue";
 import ModelPanel from "../../components/model/ModelPanel/index.vue";
 import Axios from "axios";
 
 export default {
     name: "Model",
-    components: { LogicGroupPanel, CodePanel, ModelPanel },
+    components: { GroupPanel, CodePanel, ModelPanel },
     data() {
         return {
             groupType: this.MYCONST.LogicGroup,
             groupTree: [],
             currPath: [],
-            gotoGroupId: ""
+            gotoGroupId: "",
+            currKey: "",
+            currOpenKey: ""
         };
     },
     mounted() {
@@ -25,22 +27,40 @@ export default {
             this.currPath.push(group);
             this.currPath.push(subGroup);
             this.gotoGroupId = subGroup.id;
+            this.currKey = subGroup.id;
+            this.currOpenKey = group.id;
         },
         getGroupTree() {
             let url = this.MYURL.model.GroupTree;
             Axios.get(url)
                 .then(res => {
-                    console.log("model group tree is :", res.data);
                     this.groupTree = res.data;
                 })
                 .catch(e => {
-                    console.log("获取数据失败，访问url ：" + url, e);
+                    console.log(
+                        "Failed to get data, please check URL：" + url,
+                        e
+                    );
                 });
         },
         gotoLogicPanel() {
-            console.log("it is me !");
             this.currPath = [];
             this.groupType = this.MYCONST.LogicGroup;
+        },
+        listenGroupChange() {
+            console.log("i will reload group tree");
+            this.getGroupTree();
+        },
+        listenSelectGroup(key) {
+            this.groupTree.forEach(group => {
+                let id = group.id;
+                if (id === key) {
+                    this.changePanel(group, group.child[0]);
+                }
+            });
+        },
+        titleClick(e) {
+            this.currOpenKey = e.key;
         }
     }
 };

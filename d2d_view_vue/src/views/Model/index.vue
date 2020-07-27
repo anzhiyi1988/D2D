@@ -1,9 +1,14 @@
 <template>
     <a-layout>
         <a-layout-sider width="200" style="background: #fff">
-            <a-menu mode="inline" :style="{ height: '100%', borderRight: 0 }">
+            <a-menu
+                mode="inline"
+                :selected-keys="[currKey]"
+                :openKeys="[currOpenKey]"
+                :style="{ height: '100%', borderRight: 0 }"
+            >
                 <template v-for="group in groupTree">
-                    <a-sub-menu :key="group.id">
+                    <a-sub-menu :key="group.id" @titleClick="titleClick">
                         <span slot="title">
                             <span>{{ group.name }}</span>
                         </span>
@@ -37,7 +42,11 @@
                     </a-breadcrumb-item>
                 </template>
             </a-breadcrumb>
-            <LogicGroupPanel v-if="groupType === this.MYCONST.LogicGroup" />
+            <GroupPanel
+                v-if="groupType === this.MYCONST.LogicGroup"
+                @listenGroupChange="listenGroupChange"
+                @listenSelectGroup="listenSelectGroup"
+            />
             <CodePanel
                 v-if="groupType === this.MYCONST.CodeGroup"
                 :groupId="gotoGroupId"

@@ -2,12 +2,13 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Source from "./views/Source/Source.vue";
-import Model from "./views/Model/Model.vue";
+import Model from "./views/Model/index.vue";
 import Introduce from "./views/Introduce/Introduce.vue";
 import Transform from "./views/Transform/Transform.vue";
 import Config from "./views/Config/Config.vue";
 import Version from "./views/Version/Version.vue";
 import Task from "./views/Task/Task.vue";
+import AddCode from "./components/model/AddCode/index.vue";
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -70,6 +71,12 @@ export default new Router({
                     component: Version
                 }
             ]
+        },
+        {
+            path: "/model/code/add",
+            name: "code_add",
+            meta: { title: "新增代码" },
+            component: AddCode
         }
     ]
 });

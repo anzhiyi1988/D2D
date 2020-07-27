@@ -3,10 +3,16 @@
 <mapper namespace="orz.an.d2d.dao.ModelMapper">
 
     <insert id="addModelGroup" parameterType="java.util.List">
-        insert into d2d.t_modelgroup (c_id,c_pid,c_name,c_type) values
+        insert into d2d.t_model_group (c_id,c_pid,c_name,c_type) values
         <foreach collection="list" item="item" separator=",">
             (#{item.id},#{item.pid},#{item.name},#{item.type})
         </foreach>
     </insert>
+
+    <insert id="addModelCode" parameterType="orz.an.d2d.bean.ModelCode">
+        insert into d2d.t_model_code (c_group_id, c_id, c_name, c_tablename)
+        values (#{groupId}, #{id}, #{name}, #{tableName})
+    </insert>
+
 
 </mapper>

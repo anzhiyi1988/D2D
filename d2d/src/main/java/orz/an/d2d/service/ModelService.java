@@ -9,6 +9,7 @@ package orz.an.d2d.service;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import orz.an.d2d.bean.ModelCode;
 import orz.an.d2d.bean.ModelGroup;
 import orz.an.d2d.dao.ModelMapper;
 import orz.an.d2d.util.Const;
@@ -35,7 +36,6 @@ public class ModelService {
         List<ModelGroup> list = new ArrayList<>();
 
         String uuid = UUID.randomUUID().toString().replace("-", "");
-        System.out.println(uuid);
         modelGroup.setId(uuid);
         modelGroup.setType(Const.LogicGroup);
 
@@ -96,6 +96,26 @@ public class ModelService {
 
     public List<ModelGroup> getLogicGroupList() {
         return modelMapper.getLogicGroupList();
+    }
+
+    public boolean addCode(ModelCode modelCode) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        modelCode.setId(uuid);
+        try {
+            modelMapper.addModelCode(modelCode);
+            return true;
+        } catch (RuntimeException e) {
+            System.out.println(e);
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public List<ModelCode> getCodeList(String groupId) {
+
+
+        return modelMapper.getCodeList(groupId);
     }
 }
 

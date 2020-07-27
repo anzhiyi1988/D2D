@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-button type="primary">
+        <a-button type="primary" @click="openAddCodeForm(groupId)">
             新代码
         </a-button>
         <a-layout>
@@ -9,7 +9,7 @@
                     <a @click="viewCode(record)">{{ text }}</a>
                 </span>
                 <span slot="action" slot-scope="record">
-                    <a @click="updCode(record)">编辑</a>
+                    <a @click="openEditCodeForm(record)">编辑</a>
                     <a-divider type="vertical" />
                     <a @click="delCode(record)">删除</a>
                 </span>

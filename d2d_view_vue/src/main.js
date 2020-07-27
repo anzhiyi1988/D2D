@@ -16,7 +16,11 @@ import {
     Icon,
     Tree,
     Table,
-    Divider
+    Divider,
+    Modal,
+    Form,
+    Input,
+    Select
 } from "ant-design-vue";
 
 Vue.config.productionTip = false;
@@ -29,6 +33,10 @@ Vue.use(Icon);
 Vue.use(Tree);
 Vue.use(Table);
 Vue.use(Divider);
+Vue.use(Modal);
+Vue.use(Form);
+Vue.use(Input);
+Vue.use(Select);
 new Vue({
     router,
     store,

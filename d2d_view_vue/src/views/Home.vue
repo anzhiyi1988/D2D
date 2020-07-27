@@ -35,6 +35,9 @@
         <router-view></router-view>
         <a-layout-footer
             :style="{
+                position: 'fixed',
+                bottom: '2px',
+                width: '100%',
                 textAlign: 'center',
                 height: '40px',
                 padding: '12px 50px'
@@ -63,14 +66,13 @@ export default {
     methods: {
         getMenuData() {
             let menuData = [];
-            for (let d of this.$router.options.routes) {
-                for (let dd of d.children) {
-                    const newdd = { ...dd };
-                    if (!dd.hideInMenu) {
-                        menuData.push(newdd);
-                    }
-                    this.selectedKeysMap[dd.path] = [dd.path];
+            let d = this.$router.options.routes[0];
+            for (let dd of d.children) {
+                const newdd = { ...dd };
+                if (!dd.hideInMenu) {
+                    menuData.push(newdd);
                 }
+                this.selectedKeysMap[dd.path] = [dd.path];
             }
             return menuData;
         }

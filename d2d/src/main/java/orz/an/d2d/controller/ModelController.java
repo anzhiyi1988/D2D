@@ -10,10 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import orz.an.d2d.bean.ModelCode;
 import orz.an.d2d.bean.ModelGroup;
 import orz.an.d2d.service.ModelService;
 
@@ -47,9 +45,9 @@ public class ModelController {
     }
 
     @ApiOperation(value = "获取逻辑组列表", notes = "模型管理")
-    @GetMapping(path = "logic/group/list")
+    @GetMapping(path = "/group/list")
     @ResponseBody
-    public List<ModelGroup> getLogicGroupList() {
+    public List<ModelGroup> getGroupList() {
 
         List<ModelGroup> list = modelService.getLogicGroupList();
 
@@ -60,7 +58,7 @@ public class ModelController {
     @ApiOperation(value = "添加组", notes = "模型管理")
     @PostMapping(path = "/group/add")
     @ResponseBody
-    public String addModelGroup(ModelGroup modelGroup, HttpServletResponse response) {
+    public String addGroup(@RequestBody ModelGroup modelGroup, HttpServletResponse response) {
         if (modelService.addGroup(modelGroup)) {
             return "ok";
         } else {
@@ -68,4 +66,28 @@ public class ModelController {
             return "error";
         }
     }
+
+
+    @ApiOperation(value = "添加代码", notes = "模型管理")
+    @PostMapping(path = "/code/add")
+    @ResponseBody
+    public String addCode(@RequestBody ModelCode modelCode, HttpServletResponse response) {
+        if (modelService.addCode(modelCode)) {
+            return "ok";
+        } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return "error";
+        }
+    }
+
+    @ApiOperation(value = "获取代码列表", notes = "模型管理")
+    @GetMapping(path = "/code/list")
+    @ResponseBody
+    public List<ModelCode> getGroupList(String groupId) {
+
+        List<ModelCode> list = modelService.getCodeList(groupId);
+
+        return list;
+    }
+
 }

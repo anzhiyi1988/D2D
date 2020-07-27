@@ -1,4 +1,5 @@
 import Axios from "axios";
+import AddGroup from "../AddGroup/index.vue";
 
 const columns = [
     {
@@ -20,28 +21,29 @@ const columns = [
 ];
 
 export default {
-    name: "LogicGroupPanel",
+    name: "GroupPanel",
+    components: { AddGroup },
     data() {
         return {
             logicList: [],
-            columns
+            columns,
+            visible: false
         };
     },
     mounted() {
-        this.getLogicGroupList();
+        this.getGroupList();
     },
 
     methods: {
-        getLogicGroupList() {
-            let url = this.MYURL.model.LogicGroupList;
+        getGroupList() {
+            let url = this.MYURL.model.GroupList;
             Axios.get(url)
                 .then(res => {
-                    console.log("数据是：", res);
                     this.logicList = res.data;
                 })
                 .catch(e => {
                     console.log(
-                        "获取数据失败，请查看数据接口是否可访问：" + url,
+                        "Failed to get data, please check URL：" + url,
                         e
                     );
                 });
@@ -51,9 +53,22 @@ export default {
             console.log("需要发布的的模型为：", p);
         },
 
-        viewModelGroup(p) {
-            console.log("需要查看的模型为：", p);
+        viewModelGroup(id) {
+            console.log("tell upper which group i will view");
+            this.$emit("listenSelectGroup", id);
         },
-        addModelGroup() {}
+
+        showAddGroupForm() {
+            this.visible = true;
+        },
+
+        listenGroupChange1() {
+            console.log("i will reload group list");
+            this.getGroupList();
+            this.$emit("listenGroupChange");
+        },
+        listenVisible(p) {
+            this.visible = p;
+        }
     }
 };

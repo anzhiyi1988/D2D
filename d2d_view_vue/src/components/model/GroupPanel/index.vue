@@ -1,8 +1,13 @@
 <template>
     <div>
-        <a-button type="primary">
+        <a-button type="primary" @click="showAddGroupForm">
             新建分组
         </a-button>
+        <add-group
+            :visible="visible"
+            @listenVisible="listenVisible"
+            @listenGroupChange1="listenGroupChange1"
+        />
         <a-layout>
             <a-table row-key="id" :columns="columns" :data-source="logicList">
                 <span slot="name" slot-scope="text, record">
